@@ -1,0 +1,153 @@
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+
+  h2 {
+    color: var(--text-primary);
+    font-size: 1.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.form-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+}
+
+.policy-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .required {
+      color: var(--danger-color);
+    }
+  }
+
+  input {
+    &.ng-invalid.ng-touched {
+      border-color: var(--danger-color);
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      }
+    }
+
+    &.ng-valid.ng-touched {
+      border-color: var(--success-color);
+    }
+  }
+
+  .error-message {
+    color: var(--danger-color);
+    font-size: 0.75rem;
+    margin-top: -0.25rem;
+  }
+
+  .hint {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+
+  @media (max-width: 640px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.save-btn {
+  background-color: var(--success-color);
+  color: white;
+  padding: 0.625rem 1.5rem;
+  font-weight: 600;
+  flex: 1;
+
+  &:hover {
+    background-color: var(--success-hover);
+  }
+
+  &:disabled {
+    background-color: var(--text-secondary);
+  }
+}
+
+.cancel-btn {
+  background-color: white;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.625rem 1.5rem;
+  font-weight: 500;
+
+  &:hover {
+    background-color: var(--bg-gray);
+  }
+}
+
+.input-icon {
+  position: relative;
+
+  input {
+    padding-left: 2.5rem;
+  }
+
+  .icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+  }
+}
+

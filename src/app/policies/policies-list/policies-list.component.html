@@ -1,0 +1,64 @@
+<div class="policies-container">
+  <div class="header">
+    <h2>Insurance Policies</h2>
+    <button
+      class="add-btn"
+      [attr.data-testid]="'add-policy'"
+      (click)="router.navigate(['/policies/new'])">
+      Add Policy
+    </button>
+  </div>
+
+  @if (policies().length === 0) {
+    <div class="table-container">
+      <div class="empty-state">
+        <div class="empty-icon">📋</div>
+        <h3>No policies yet</h3>
+        <p>Get started by adding your first insurance policy</p>
+        <button
+          class="add-btn"
+          (click)="router.navigate(['/policies/new'])">
+          Add Your First Policy
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="table-container">
+      <table class="policies-table">
+        <thead>
+          <tr>
+            <th>Policy Number</th>
+            <th>Customer Name</th>
+            <th>Premium Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of policies(); track p.id) {
+            <tr>
+              <td class="policy-number">{{p.policyNumber}}</td>
+              <td class="customer-name">{{p.customerName}}</td>
+              <td class="premium">${{p.premiumAmount.toFixed(2)}}</td>
+              <td>
+                <div class="actions">
+                  <button
+                    class="edit-btn"
+                    [attr.data-testid]="'edit-' + p.id"
+                    (click)="router.navigate(['/policies', p.id, 'edit'])">
+                    Edit
+                  </button>
+                  <button
+                    class="delete-btn"
+                    [attr.data-testid]="'delete-' + p.id"
+                    (click)="delete(p.id)">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
