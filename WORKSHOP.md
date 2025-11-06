@@ -6,14 +6,15 @@
 
 10–25 min: Playwright best practices
 - Walk through guidelines and page objects
-- Small refactor task: convert a selector to getByTestId/getByRole
 
 25–45 min: AI-assisted test generation
-- Use prompts in /02-prompts to generate tests (Copilot / MCP)
-- Run generated tests and iterate
+- Create seed test
+- Create test plan
+- Generate tests with AI
 
-45–55 min: Improve tests
+45–55 min: Improve tests and fix broken ones
 - Apply page objects and best practices to AI output
+- Run healer to fix broken tests
 
 55–60 min: Wrap up
 - Takeaways, CI next steps, Q&A
