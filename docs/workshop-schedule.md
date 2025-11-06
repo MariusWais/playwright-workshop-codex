@@ -9,8 +9,9 @@
 
 25–45 min: AI-assisted test generation
 - Create seed test
-- Create test plan
-- Generate tests with AI
+- Create test plan with @planner
+- Generate tests with @generator
+- Fix tests with @healer
 
 45–55 min: Improve tests and fix broken ones
 - Apply page objects and best practices to AI output

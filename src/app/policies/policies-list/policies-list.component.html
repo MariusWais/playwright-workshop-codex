@@ -35,10 +35,10 @@
         </thead>
         <tbody>
           @for (p of policies(); track p.id) {
-            <tr>
-              <td class="policy-number">{{p.policyNumber}}</td>
-              <td class="customer-name">{{p.customerName}}</td>
-              <td class="premium">${{p.premiumAmount.toFixed(2)}}</td>
+            <tr [attr.data-testid]="'policy-row-' + p.id">
+              <td class="policy-number" [attr.data-testid]="'policy-number-' + p.id">{{p.policyNumber}}</td>
+              <td class="customer-name" [attr.data-testid]="'customer-name-' + p.id">{{p.customerName}}</td>
+              <td class="premium" [attr.data-testid]="'premium-' + p.id">${{p.premiumAmount.toFixed(2)}}</td>
               <td>
                 <div class="actions">
                   <button
