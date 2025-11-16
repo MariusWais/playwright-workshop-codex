@@ -1,9 +1,15 @@
 # Glossary
 
-## Playwright Terms
+For terminology reference, see:
 
-### Action
-An interaction with a page element (click, fill, select, etc.). Playwright automatically waits for actions to be actionable before performing them.
+**[Quick Reference & Glossary](/docs/deep-dive/cheatsheet.md)** (merged reference)
+
+The merged document includes:
+- Core Playwright concepts
+- AI Agent definitions
+- Test automation terminology
+- Commands and patterns
+
 
 ### Assertion
 A validation that checks if a condition is true. In Playwright, use `expect()` for assertions:

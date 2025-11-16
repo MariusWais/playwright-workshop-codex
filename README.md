@@ -1,167 +1,155 @@
-# Playwright Workshop Documentation
+# CODEx: Playwright Workshop - AI Agents & Test Automation
 
-Welcome to the Playwright + AI Agents Testing Workshop! This documentation provides everything you need to learn modern test automation with Playwright and AI-assisted test generation.
-
-## 📚 Documentation Structure
-
-### For Workshop Attendees
-
-Follow these guides in order:
-
-1. **[Getting Started](docs/01-getting-started.md)** - Setup, installation, and running your first test
-2. **[AI Agents Workflow](docs/02-ai-agents-workflow.md)** - Understanding Planner, Generator, and Healer agents
-3. **[Using AI Agents](docs/03-using-ai-agents.md)** - Practical examples and prompts for each agent
-4. **[Test Writing Guide](docs/04-test-writing-guide.md)** - Best practices for selectors, waits, and structure
-5. **[Page Objects & Fixtures](docs/05-page-objects-and-fixtures.md)** - Patterns for maintainable test code
-6. **[Debugging Flaky Tests](docs/06-debugging-flaky-tests.md)** - Identifying and fixing unreliable tests
-
-### Quick Reference
-
-- **[Cheatsheet](docs/cheatsheet.md)** - Quick reference for commands and patterns
-- **[Glossary](docs/glossary.md)** - Common terms and definitions
-
-### For Instructors
-
-- **[Workshop Guide](docs/workshop-guide.md)** - Teaching plan, schedule, and demo script
-
-### Examples
-
-- **[examples/](examples/)** - Sample test plans and outputs from AI agents
-
-## 🚀 Quick Start
-
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Install Playwright browsers
-npx playwright install
-
-# 3. Start the demo application
-npm start
-
-# 4. Run tests
-npx playwright test
-
-# 5. View test report
-npx playwright show-report
-```
-
-## 🎯 Workshop Objectives
-
-By the end of this workshop, you will:
-
-✅ Understand Playwright fundamentals
-✅ Write reliable, maintainable tests
-✅ Use AI agents to generate test plans and code
-✅ Debug and fix flaky tests
-✅ Apply best practices for test automation
-✅ Be ready to implement Playwright in your projects
-
-## 🛠️ Prerequisites
-
-- Basic JavaScript/TypeScript knowledge
-- Node.js 18+ installed
-- VS Code (recommended for AI agents)
-- GitHub Copilot (optional, for AI features)
-
-## 📖 Learning Path
-
-### Beginner Track (30 minutes)
-1. Getting Started
-2. Run existing tests
-3. Understand test structure
-4. Write your first test
-
-### Intermediate Track (60 minutes)
-1. Getting Started
-2. AI Agents Workflow
-3. Generate tests with AI
-4. Apply best practices
-
-### Advanced Track (90 minutes)
-1. Complete all beginner/intermediate content
-2. Page Objects & Fixtures
-3. Debugging Flaky Tests
-4. CI/CD integration
-
-## 🏗️ Workshop Application
-
-The demo application is an **Insurance Policy Management System** built with Angular 20:
-
-- **Features**: Create, Read, Update, Delete insurance policies
-- **Tech Stack**: Angular 20 (standalone components), localStorage persistence
-- **URL**: http://localhost:4222
-- **Routes**:
-  - `/policies` - List view
-  - `/policies/new` - Create policy
-  - `/policies/:id/edit` - Edit policy
-
-## 🤖 AI Agents Overview
-
-This workshop introduces three specialized AI agents (chatmodes):
-
-- **🎭 Planner** - Explores your app and creates test plans
-- **🎭 Generator** - Converts test plans into executable code
-- **🎭 Healer** - Automatically fixes failing tests
-
-See [AI Agents Workflow](docs/02-ai-agents-workflow.md) for details.
-
-## 🔧 Troubleshooting
-
-### Port Already in Use
-```bash
-# Kill process on port 4222
-lsof -ti:4222 | xargs kill -9
-
-# Or use a different port
-npm start -- --port 4223
-```
-
-### Playwright Browsers Not Installed
-```bash
-npx playwright install
-```
-
-### Tests Failing After Checkout
-```bash
-# Clear cache and reinstall
-rm -rf node_modules package-lock.json
-npm install
-npx playwright install
-```
-
-### AI Agents Not Showing in VS Code
-See [Getting Started - AI Agents Setup](docs/01-getting-started.md#ai-agents-setup)
-
-## 📞 Support
-
-- **Issues**: Open an issue in the GitHub repository
-- **Questions**: Ask during the workshop or in discussion forum
-- **Documentation**: All guides are in this `/docs` folder
-
-## 🎓 Next Steps After Workshop
-
-1. **Practice**: Try the AI agents on your own applications
-2. **Integrate**: Add Playwright to your CI/CD pipeline
-3. **Expand**: Write more tests for edge cases
-4. **Share**: Teach your team what you learned
-5. **Contribute**: Share your improvements back to the community
-
-## 📚 Additional Resources
-
-- **Official Playwright Docs**: https://playwright.dev
-- **Playwright Discord**: https://aka.ms/playwright/discord
-- **Best Practices**: See [Test Writing Guide](docs/04-test-writing-guide.md)
-- **Community Examples**: https://github.com/microsoft/playwright
-
-## 🎉 Let's Get Started!
-
-Ready to begin? Head to **[Getting Started](docs/01-getting-started.md)** to set up your environment and run your first test.
+A hands-on 1-hour workshop on test automation with Playwright and AI-powered test generation using GitHub Copilot agents.
 
 ---
 
-**Workshop Version**: 1.0.0  
-**Last Updated**: November 2025  
-**Playwright Version**: Latest  
-**Target Audience**: QA Engineers, Developers, Test Automation Engineers
+## Quick Start (5 minutes)
+
+```bash
+git clone https://github.com/MariusWais/playwright-workshop-codex.git
+cd playwright-workshop-codex
+npm install && npx playwright install
+npm start                    # Terminal 1
+npx playwright test --headed # Terminal 2
+```
+
+**Report opens automatically.** You're done! 🎉
+
+---
+
+## Prerequisites
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| Node.js | 18+ | Runtime |
+| VS Code | v1.105+ | IDE |
+| GitHub Copilot | - | AI agents |
+| Playwright Test for VS Code | - | Test runner in IDE |
+
+[Get Started: Install Prerequisites →](docs/01-getting-started.md#prerequisites)
+
+---
+
+## Workshop Learning Path (1 hour)
+
+| Time | Task | Document |
+|------|------|----------|
+| 0-15 min | Setup & verify | [Getting Started](docs/01-getting-started.md) |
+| 15-60 min | Learn & practice | [Using AI Agents](docs/02-ai-agents-workflow.md) |
+
+**Keep the AI Agents guide open** — it has everything: step-by-step workflow, commands, pro tips, and troubleshooting.
+
+---
+
+## What You'll Do
+
+- ✅ Setup Playwright
+- ✅ Use Planner (`@planner`) to explore and plan tests
+- ✅ Use Generator (`@generator`) to generate test code
+- ✅ Run tests and see results
+- ✅ Use Healer (`@healer`) to fix failures
+- ✅ Iterate and refine
+
+---
+
+## The Workshop Stack
+
+**Demo App**: Insurance Policy Management System (Angular 20)
+- **URL**: http://localhost:4222
+- **Features**: Create, read, update, delete policies
+- **Storage**: localStorage (persists across reloads)
+
+**Main Flows**:
+- List policies: `/policies`
+- Create policy: `/policies/new`
+- Edit policy: `/policies/:id/edit`
+
+---
+
+## Documentation Structure
+
+### 📖 Workshop Documents (Read These)
+
+1. **[Getting Started](docs/01-getting-started.md)** — Clone, install, run (2 min)
+2. **[Using AI Agents](docs/02-ai-agents-workflow.md)** — Full reference + hands-on (50+ min)
+
+### 📚 Deep-Dive Resources (Learn After Workshop)
+
+For deeper learning, see `/docs/deep-dive/`:
+- **agents-workflow-patterns.md** — Sequential/parallel/hybrid workflows
+- **agents-advanced.md** — Architecture & technical implementation
+- **test-writing-guide.md** — Playwright best practices
+- **page-objects-and-fixtures.md** — Advanced patterns
+- **debugging-flaky-tests.md** — Troubleshooting strategies
+- **cheatsheet.md** — Commands & quick reference
+- **glossary.md** — Terms & definitions
+
+---
+
+## Common Commands
+
+```bash
+npm start                      # Start demo app on port 4222
+npx playwright test            # Run all tests (headless)
+npx playwright test --headed   # Run with browser visible
+npx playwright test --debug    # Step through each action
+npx playwright test --ui       # Interactive test runner
+npx playwright show-report     # View HTML report
+```
+
+---
+
+## Troubleshooting
+
+### Quick Fixes
+
+| Issue | Fix |
+|-------|-----|
+| Port 4222 in use | `lsof -ti:4222 \| xargs kill -9` |
+| Tests won't run | `npm install && npx playwright install` |
+| Browser won't open | Check `npm start` is running |
+
+### npm & Node Issues
+
+**Check your Node version:**
+```bash
+node --version    # Should be v18.0.0 or higher
+npm --version     # Should be 8.0.0 or higher
+```
+
+**If Node version is too old:**
+- [Download Node.js 18+](https://nodejs.org/) and reinstall
+
+**Clear npm cache:**
+```bash
+npm cache clean --force
+```
+
+**Full fresh install:**
+```bash
+# Remove all npm artifacts
+rm -rf node_modules package-lock.json
+
+# Reinstall everything
+npm install
+npx playwright install --with-deps
+```
+
+**Still having issues?**
+```bash
+# Nuclear option (deletes cache, node_modules, lock files)
+rm -rf node_modules package-lock.json ~/.npm
+npm install
+npx playwright install --force
+```
+
+---
+
+## Ready to Begin?
+
+### 👉 [Start Here: Getting Started](docs/01-getting-started.md)
+
+Then move to: [Using AI Agents](docs/02-ai-agents-workflow.md)
+
+
