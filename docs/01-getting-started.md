@@ -1,8 +1,8 @@
-# Getting Started with Playwright
+# Getting Started
 
 ## Introduction
 
-Welcome to Playwright! This guide will get you up and running in minutes. By the end, you'll have:
+Welcome to the Codex Playwright workshop 2025! This guide will get you up and running in minutes. By the end, you'll have:
 - ✅ Playwright installed and configured
 - ✅ The demo application running
 - ✅ Your first test executed
@@ -13,14 +13,10 @@ Welcome to Playwright! This guide will get you up and running in minutes. By the
 Before starting, ensure you have:
 
 - **Node.js 18+** - [Download here](https://nodejs.org/)
-- **VS Code** (recommended) - [Download here](https://code.visualstudio.com/)
 - **Git** - [Download here](https://git-scm.com/)
+- **VS Code** (recommended) - [Download here](https://code.visualstudio.com/)
+- **Playwright Plugin for VSCode** (optional, for AI features) [Download here](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
 - **GitHub Copilot** (optional, for AI features)
-
-Check your Node version:
-```bash
-node --version  # Should be 18.0.0 or higher
-```
 
 ## Quick Setup (5 minutes)
 
@@ -28,8 +24,8 @@ node --version  # Should be 18.0.0 or higher
 
 ```bash
 # Clone the workshop repository
-git clone https://github.com/YOUR_ORG/playwright-workshop-codex.git
-cd playwright-workshop-codex/demo-app
+git clone https://github.com/MariusWais/playwright-workshop-codex.git
+cd playwright-workshop-codex
 
 # Install dependencies
 npm install
