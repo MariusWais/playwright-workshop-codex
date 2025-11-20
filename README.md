@@ -31,13 +31,13 @@ npx playwright test --headed # Terminal 2
 
 ## Workshop Agenda (1 Hour)
 
-| Time | Topic | Focus |
-|------|-------|-------|
-| 0-10 min | Setup & Verification | Install, run app, run seed test |
-| 10-22 min | Test Planning (Planner) | Explore app, generate test scenarios |
-| 22-40 min | Test Generation (Generator) | Create executable test code |
-| 40-52 min | Test Maintenance (Healer) | Fix failures, stabilize tests |
-| 52-60 min | Best Practices & Wrap-Up | Pitfalls, architectures, next steps |
+| Topic | Focus |
+|-------|-------|
+| Setup & Verification | Install, run app, run seed test |
+| Test Planning (Planner) | Explore app, generate test scenarios |
+| Test Generation (Generator) | Create executable test code |
+| Test Maintenance (Healer) | Fix failures, stabilize tests |
+| Best Practices & Wrap-Up | Pitfalls, architectures, next steps |
 
 ### 👉 [Open Workshop Guide](WORKSHOP.md)
 
