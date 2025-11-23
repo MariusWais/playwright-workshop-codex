@@ -11,7 +11,7 @@
 
 ✅ Node.js 18+ installed  
 ✅ VS Code v1.105+ installed  
-✅ GitHub Copilot active  
+✅ GitHub Copilot active (Claude Sonnet preferably)  
 ✅ Playwright Test for VS Code extension installed
 
 ### Quick Start
@@ -19,7 +19,8 @@
 ```bash
 git clone https://github.com/MariusWais/playwright-workshop-codex.git
 cd playwright-workshop-codex
-npm install && npx playwright install
+npm install
+npx playwright install
 ```
 
 ### Start App
@@ -71,7 +72,7 @@ Open `test-plan.md` and review:
 @planner Map complete flow: create → edit → delete → persistence
 ```
 
-✅ **Checkpoint:** You have a `test-plan.md` with 10-15 scenarios
+✅ **Checkpoint:** You have a `test-plan.md` with different test scenarios
 
 ---
 
