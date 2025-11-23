@@ -7,11 +7,25 @@ A hands-on 1-hour workshop on test automation with Playwright and AI-powered tes
 ## Quick Start (5 minutes)
 
 ```bash
+# Clone workshop project from Github
 git clone https://github.com/MariusWais/playwright-workshop-codex.git
+
+# Open the project folder
 cd playwright-workshop-codex
-npm install && npx playwright install
-npm start                    # Terminal 1
-npx playwright test --headed # Terminal 2
+
+# Install npm packages
+npm install
+
+# Install playwright browsers
+npx playwright install
+
+# Start demo app
+npm start
+
+# TODO: open new Terminal Window
+
+# Run seed test
+npx playwright test --headed 
 ```
 
 **Report opens automatically.** You ran your first test! 🎉
@@ -34,25 +48,13 @@ npx playwright test --headed # Terminal 2
 | Topic | Focus |
 |-------|-------|
 | Setup & Verification | Install, run app, run seed test |
-| Test Planning (Planner) | Explore app, generate test scenarios |
-| Test Generation (Generator) | Create executable test code |
-| Test Maintenance (Healer) | Fix failures, stabilize tests |
-| Best Practices & Wrap-Up | Pitfalls, architectures, next steps |
+| Test Design (Planner Agent) | Explore app, generate test scenarios |
+| Test Coding (Generator Agent) | Create executable test code |
+| Test Maintenance (Healer Agent) | Fix failures, stabilize tests |
+| Best Practices & Wrap-Up | Pitfalls, architectures |
 
 ### 👉 [Open Workshop Guide](WORKSHOP.md)
 
----
-
-## Self-Study Resources (After Workshop)
-
-Explore `/docs/self-study/` for deeper learning:
-- **agents-workflow-patterns.md** — Sequential/parallel/hybrid workflows
-- **agents-advanced.md** — Architecture & technical implementation
-- **test-writing-guide.md** — Playwright best practices
-- **page-objects-and-fixtures.md** — Advanced patterns
-- **debugging-flaky-tests.md** — Troubleshooting strategies
-- **cheatsheet.md** — Commands & quick reference
-- **glossary.md** — Terms & definitions
 
 ---
 
@@ -67,3 +69,15 @@ Explore `/docs/self-study/` for deeper learning:
 | Fresh install needed | `rm -rf node_modules package-lock.json && npm install` |
 
 
+---
+
+## Self-Study Resources (After Workshop)
+
+Explore `/docs/self-study/` for deeper learning:
+- **agents-workflow-patterns.md** — Sequential/parallel/hybrid workflows
+- **agents-advanced.md** — Architecture & technical implementation
+- **test-writing-guide.md** — Playwright best practices
+- **page-objects-and-fixtures.md** — Advanced patterns
+- **debugging-flaky-tests.md** — Troubleshooting strategies
+- **cheatsheet.md** — Commands & quick reference
+- **glossary.md** — Terms & definitions
