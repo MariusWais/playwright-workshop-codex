@@ -76,6 +76,34 @@ test.beforeEach(async ({ page }) => {
 });
 ```
 
+### Test Slow Network with DevTools Throttling
+
+To manually test your app under slow network conditions using browser DevTools:
+
+**Chrome/Chromium DevTools:**
+1. Open DevTools (`F12`)
+2. Go to **Network** tab
+3. Look for the throttling dropdown (usually shows "No throttling")
+4. Select preset (Slow 3G, Fast 3G, etc.) or create custom throttling:
+   - **Slow 3G**: ~400ms latency, ~400kb/s download
+   - **Fast 3G**: ~150ms latency, ~1.6mb/s download
+   - **4G**: ~4ms latency, ~4mb/s download
+5. Reload the page to see how your app performs
+
+**Custom Throttling:**
+- Click dropdown → "Custom" to set your own values
+- Adjust: Download speed (kb/s), Upload speed (kb/s), Latency (ms)
+- Useful for testing edge cases: "5G", "Satellite", "Rural"
+
+**Testing Flaky Behavior:**
+```typescript
+// In Playwright Debug Mode, open DevTools and throttle
+npx playwright test --headed --debug
+
+// Then throttle in DevTools while test runs to catch race conditions
+// This simulates slow CI/CD pipeline networks
+```
+
 ---
 
 ## Debugging Strategies
@@ -95,5 +123,3 @@ npx playwright show-trace trace.zip
 ```
 
 ---
-
-**Full guide**: See `/docs/deep-dive/debugging-flaky-tests.md`

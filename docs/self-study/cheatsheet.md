@@ -99,4 +99,3 @@ npm install
 ```
 
 **Full docs**: See `/docs` folder  
-**Need help?**: Check workshop guide or ask in chat

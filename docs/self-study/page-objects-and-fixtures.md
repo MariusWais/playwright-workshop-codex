@@ -46,6 +46,12 @@ test('create policy', async ({ page }) => {
 // pages/policies-page.ts
 import { Page, Locator, expect } from '@playwright/test';
 
+// Selector constants
+const ADD_POLICY_BTN = 'add-policy';
+const POLICY_NUMBER_INPUT = 'policyNumber';
+const CUSTOMER_NAME_INPUT = 'customerName';
+const SAVE_BTN = 'save';
+
 export class PoliciesPage {
   constructor(private page: Page) {}
   
@@ -55,10 +61,10 @@ export class PoliciesPage {
   }
   
   async createPolicy(data: { number: string; customer: string }) {
-    await this.page.getByTestId('add-policy').click();
-    await this.page.getByTestId('policyNumber').fill(data.number);
-    await this.page.getByTestId('customerName').fill(data.customer);
-    await this.page.getByTestId('save').click();
+    await this.page.getByTestId(ADD_POLICY_BTN).click();
+    await this.page.getByTestId(POLICY_NUMBER_INPUT).fill(data.number);
+    await this.page.getByTestId(CUSTOMER_NAME_INPUT).fill(data.customer);
+    await this.page.getByTestId(SAVE_BTN).click();
   }
   
   async expectPolicyVisible(policyNumber: string) {
@@ -81,7 +87,13 @@ test('create policy', async ({ page }) => {
 
 ```typescript
 // fixtures.ts
-import { test as base } from '@playwright/test';
+import { test as base, expect } from '@playwright/test';
+
+// Selector constants
+const ADD_POLICY_BTN = 'add-policy';
+const POLICY_NUMBER_INPUT = 'policyNumber';
+const CUSTOMER_NAME_INPUT = 'customerName';
+const SAVE_BTN = 'save';
 
 export const test = base.extend({
   policiesPage: async ({ page }, use) => {
@@ -91,10 +103,10 @@ export const test = base.extend({
       },
       
       async createPolicy(data) {
-        await page.getByTestId('add-policy').click();
-        await page.getByTestId('policyNumber').fill(data.number);
-        await page.getByTestId('customerName').fill(data.customer);
-        await page.getByTestId('save').click();
+        await page.getByTestId(ADD_POLICY_BTN).click();
+        await page.getByTestId(POLICY_NUMBER_INPUT).fill(data.number);
+        await page.getByTestId(CUSTOMER_NAME_INPUT).fill(data.customer);
+        await page.getByTestId(SAVE_BTN).click();
       },
       
       async expectPolicyVisible(policyNumber: string) {
@@ -106,7 +118,7 @@ export const test = base.extend({
   }
 });
 
-export { expect } from '@playwright/test';
+export { expect };
 
 // test.spec.ts
 import { test, expect } from '../fixtures';

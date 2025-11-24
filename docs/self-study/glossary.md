@@ -1,16 +1,5 @@
 # Glossary
 
-For terminology reference, see:
-
-**[Quick Reference & Glossary](/docs/deep-dive/cheatsheet.md)** (merged reference)
-
-The merged document includes:
-- Core Playwright concepts
-- AI Agent definitions
-- Test automation terminology
-- Commands and patterns
-
-
 ### Assertion
 A validation that checks if a condition is true. In Playwright, use `expect()` for assertions:
 ```typescript
@@ -19,9 +8,6 @@ await expect(page.getByText('Hello')).toBeVisible();
 
 ### Auto-waiting
 Playwright's built-in mechanism that automatically waits for elements to be ready before performing actions. No need for manual `sleep()` or explicit waits in most cases.
-
-### Browser Context
-An isolated browser session (similar to an incognito window). Each context has its own cookies, localStorage, and cache. Perfect for parallel test isolation.
 
 ### Fixture
 Playwright's dependency injection system. Fixtures provide setup/teardown logic and reusable test objects:
@@ -98,7 +84,7 @@ Then I should see the dashboard
 ```
 
 ### CI/CD (Continuous Integration/Continuous Deployment)
-Automated pipeline that runs tests on every code change. Playwright integrates with GitHub Actions, Jenkins, GitLab CI, etc.
+Automated pipeline that runs tests on every code change. Playwright integrates with Azure DevOps, GitHub Actions, GitLab CI, etc.
 
 ### Data-testid
 HTML attribute specifically for testing: `<button data-testid="submit">`. Preferred selector type because it's stable and independent of styling.
@@ -118,8 +104,13 @@ Testing existing functionality after changes to ensure nothing broke. Automated 
 ### Smoke Test
 Quick, high-level tests that verify basic functionality works. Run these first before detailed tests.
 
+### Sanity Test
+Quick validation that the application is in a working state and ready for testing. Similar to smoke tests but typically a single test that confirms critical paths function. 
+Example: app loads, requests were successful, main features are accessible.
+
 ### Test Coverage
 Percentage of application features/code tested by automated tests. Higher coverage = more confidence.
+Coverage Estimation in Playwright gathers information about parts of JavaScript and CSS that were used by the page.
 
 ### Test Isolation
 Each test is independent and doesn't rely on other tests. Tests can run in any order without affecting results.
@@ -129,7 +120,7 @@ Each test is independent and doesn't rely on other tests. Tests can run in any o
 ## Testing Best Practices Terms
 
 ### DRY (Don't Repeat Yourself)
-Principle of avoiding code duplication. Use fixtures or page objects instead of copying selector strings everywhere.
+Principle of avoiding code duplication. Use fixtures or page objects and use constants for selector ids (data-testid) instead of copying selector strings everywhere.
 
 ### Explicit Wait
 Manually waiting for a specific condition:
@@ -237,9 +228,6 @@ npx playwright install chromium        # Install specific browser
 ---
 
 ## Workshop-Specific Terms
-
-### 01-angular-app / 02-angular-app
-Sample applications used in workshop. Insurance policy management app built with Angular 20.
 
 ### Custom Fixtures (`e2e/fixtures.ts`)
 Project-specific fixtures that encapsulate common workflows like creating policies, verifying data, etc.

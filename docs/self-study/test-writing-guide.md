@@ -14,9 +14,9 @@ Writing maintainable, reliable Playwright tests is an art. This guide distills y
 
 Use selectors in this order of preference:
 
-1. **`data-testid` attributes** (Most stable)
-2. **Role-based selectors** (Accessibility-friendly)
-3. **Text content** (For unique text)
+1. **`data-testid` attributes** (Most stable, use always if possible)
+2. **Role-based selectors** (Accessibility-friendly but can be too unprecise)
+3. **Text content** (For unique text, bad with multi language support)
 4. **CSS selectors** (Last resort)
 
 ### 1. data-testid Attributes (Preferred)
@@ -80,8 +80,19 @@ Playwright automatically waits for elements before actions. Use manual waits onl
 await page.getByTestId('button').click(); // Waits for clickable
 
 // Manual waits - only when needed
-await page.waitForLoadState('networkidle');
-await page.waitForURL('/dashboard');
+await page.waitForLoadState('networkidle'); // Wait for all network requests
+await page.waitForLoadState('domcontentloaded'); // Wait for DOM ready
+await page.waitForURL('/dashboard'); // Wait for URL change
+
+// Wait for specific network requests
+await page.waitForResponse(response => response.url().includes('/api/policies'));
+const response = await page.waitForResponse('**/api/policies');
+
+// Wait for network request to complete before action
+await Promise.all([
+  page.waitForResponse('**/api/policies'),
+  page.getByTestId('add-policy').click()
+]);
 
 // Avoid - arbitrary waits
 await page.waitForTimeout(5000); // Why 5 seconds?
@@ -113,7 +124,7 @@ test('should display error when logging in with invalid credentials', async ({ p
 });
 ```
 
-### Group Related Tests
+### Group Related Tests with "describe"
 
 ```typescript
 test.describe('Policy CRUD Operations', () => {

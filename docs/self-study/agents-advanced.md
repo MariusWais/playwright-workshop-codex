@@ -114,20 +114,6 @@ Modify chat modes to fit your needs:
 - Add custom validation patterns
 - Include specific assertions for your domain
 
-### Integration with CI/CD
-
-```yaml
-# .github/workflows/test.yml
-- name: Run Playwright tests
-  run: npx playwright test
-  
-- name: Auto-heal on failure
-  if: failure()
-  run: |
-    # Optionally trigger healer agent
-    # This requires additional setup
-```
-
 ### Test Plan Templates
 
 Create templates for common scenarios:
@@ -155,3 +141,59 @@ This approach is particularly powerful for:
 - Anyone tired of maintaining brittle tests
 
 The agents don't replace human expertise - they amplify it, allowing you to focus on test strategy while AI handles the repetitive work of test creation and maintenance.
+
+### Integration with CI/CD
+
+**Example Azure DevOps Pipeline Workflow:**
+
+```yaml
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UseNode@1
+    inputs:
+      version: '18.x'
+    displayName: "Use Node.js 18"
+
+  - script: npm ci
+    displayName: "Install dependencies"
+
+  - script: npx playwright install --with-deps
+    displayName: "Install Playwright browsers"
+
+  - script: npm test
+    displayName: "Run Playwright tests"
+    continueOnError: true
+
+  # Collect logs only when tests fail
+  - script: |
+      echo "Capturing failed test logs..."
+      mkdir -p test-output
+      cp -r playwright-report test-output || true
+    displayName: "Capture test failures"
+    condition: failed()
+
+  # **Healer step: automatic repair after failure**
+  - script: npm run agent:heal
+    displayName: "Run Playwright Healer Agent"
+    condition: failed()
+
+  - task: PublishTestResults@2
+    displayName: "Publish JUnit results"
+    inputs:
+      testResultsFormat: "JUnit"
+      testResultsFiles: "**/junit*.xml"
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    displayName: "Upload Playwright report"
+    inputs:
+      PathtoPublish: "playwright-report"
+      ArtifactName: "playwright-report"
+    condition: always()
+    
+```
