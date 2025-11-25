@@ -111,15 +111,15 @@ Open the generated `.spec.ts` file. Look for:
 ### Run the Test
 
 ```bash
-npx playwright test create-policy.spec.ts --headed // name of the test can differ
+npx playwright test create-policy.spec.ts --headed #name of the test can differ
 ```
 
 ### Generate More Tests
 
 ```
 @generator Generate test for: Edit Existing Policy
-@generator Generate test for: Form Validation - Empty Fields
 @generator Generate test for: Delete Policy with Confirmation
+@generator Generate test for: Form Validation - Empty Fields
 ```
 
 ### Pro Tips

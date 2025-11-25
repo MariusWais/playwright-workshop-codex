@@ -1,7 +1,7 @@
 node_modules/
 dist/
-.vscode/
 .env
 /playwright-report
+/test-results
 .angular/cache/
 package-lock.json
