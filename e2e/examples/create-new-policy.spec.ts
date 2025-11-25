@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Load all policy test data files
-const testDataDir = path.join(__dirname, '../test-data/policies');
+const testDataDir = path.join(__dirname, './test-data');
 const testDataFiles = fs.readdirSync(testDataDir).filter(file => file.startsWith('create-policy-') && file.endsWith('.json'));
 
 test.describe('Policy Creation', () => {
