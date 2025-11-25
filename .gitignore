@@ -4,3 +4,4 @@ dist/
 .env
 /playwright-report
 .angular/cache/
+package-lock.json

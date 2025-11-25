@@ -1,0 +1,10 @@
+{
+  "policyNumber": "POL-001",
+  "customerName": "John Smith",
+  "startDate": "2024-01-01",
+  "endDate": "2024-12-31",
+  "premiumAmount": "1500",
+  "expectedDisplay": {
+    "premiumAmount": "1500.00"
+  }
+}

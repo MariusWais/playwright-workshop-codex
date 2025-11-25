@@ -52,28 +52,49 @@ Chat modes contain:
 - Tool preferences (browser automation, code generation)
 - Output format expectations
 
-### Custom Fixtures (e2e/fixtures.ts)
+### Custom Fixtures (e2e/examples/fixtures.ts)
 
-Generator uses project-specific fixtures:
+Generator uses project-specific fixtures with centralized selectors:
 
 ```typescript
-// Fixtures encapsulate common workflows
+// constants/selectors.ts - Single source of truth
+export const SELECTORS = {
+  ADD_POLICY_BUTTON: 'add-policy',
+  POLICY_NUMBER: 'policyNumber',
+  CUSTOMER_NAME: 'customerName',
+  SAVE_BUTTON: 'save',
+};
+
+// fixtures.ts - Fixtures encapsulate common workflows
+import { test as base } from '@playwright/test';
+import { SELECTORS } from './constants/selectors';
+
 export const test = base.extend<PolicyFixtures>({
   policiesPage: async ({ page }, use) => {
     const policiesPage = {
-      goto: async () => { /* ... */ },
-      addPolicy: async (data) => { /* ... */ },
-      verifyPolicyInList: async (id) => { /* ... */ }
+      goto: async () => { await page.goto('/'); },
+      addPolicy: async (data) => {
+        await page.getByTestId(SELECTORS.ADD_POLICY_BUTTON).click();
+        await page.getByTestId(SELECTORS.POLICY_NUMBER).fill(data.policyNumber);
+        await page.getByTestId(SELECTORS.SAVE_BUTTON).click();
+      },
+      verifyPolicyInList: async (number, name, amount) => {
+        await page.getByText(number).waitFor({ state: 'visible' });
+      }
     };
     await use(policiesPage);
   }
 });
+
+export { expect } from '@playwright/test';
 ```
 
 Benefits:
 - DRY tests (Don't Repeat Yourself)
 - Consistent workflows
 - Easy to update when flows change
+- Centralized selector management
+- Single point of change for selector updates
 
 ---
 
@@ -97,10 +118,28 @@ Benefits:
 ### Best Practices Learned
 
 1. **Start with data-testid attributes**: Add them to your app before generating tests
-2. **Review generated tests**: AI is good but not perfect
-3. **Use fixtures**: Define common workflows before generation
-4. **Seed data properly**: Create a seed test that sets up clean state
-5. **Iterate quickly**: Generate → Run → Heal → Repeat
+2. **Centralize selectors**: Create `constants/selectors.ts` before test generation
+3. **Prepare fixtures**: Define common workflows in `fixtures.ts` for Generator to use
+4. **Review generated tests**: AI is good but not perfect
+5. **Specify architecture in prompts**: Tell Generator to use fixtures and selector constants
+6. **Seed data properly**: Create a seed test that sets up clean state
+7. **Iterate quickly**: Generate → Run → Heal → Repeat
+
+### Effective Generator Prompts
+
+```bash
+# Basic prompt (works but not optimal)
+@generator Generate test for: Create New Policy
+
+# Better prompt (specifies selectors)
+@generator Generate test for: Create New Policy using getByTestId selectors
+
+# Best prompt (specifies architecture)
+@generator Generate test for: Create New Policy
+Use fixtures from e2e/fixtures.ts for common workflows
+Abstract all data-testid selectors to constants/selectors.ts
+Use policiesPage.addPolicy() fixture method
+```
 
 ---
 

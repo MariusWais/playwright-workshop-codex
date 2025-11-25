@@ -1,6 +1,5 @@
 # Workshop Guide: AI-Assisted E2E Testing with Playwright
 
-**Duration:** 1 hour  
 **Goal:** Learn to use Planner, Generator, and Healer agents to create, run, and maintain Playwright tests
 
 ---
@@ -9,9 +8,9 @@
 
 ### Prerequisites Check
 
-✅ Node.js 18+ installed  
+✅ Node.js 18+ installed
 ✅ VS Code v1.105+ installed  
-✅ GitHub Copilot active (Claude Sonnet preferably)  
+✅ GitHub Copilot active (Claude Sonnet 4.5)  
 ✅ Playwright Test for VS Code extension installed
 
 ### Quick Start
@@ -44,6 +43,10 @@ npx playwright test --headed    # Terminal 2
 ## Part 2: Create a Test Plan with Planner Agent
 
 Open Copilot Chat (`Ctrl+Shift+I` / `Cmd+Shift+I`):
+
+Preconditions: 
+- Select seed test as context in Copilot
+- Select Planner Agent Mode
 
 ```
 @planner Generate a test plan for the insurance policy app
@@ -80,8 +83,15 @@ Open `test-plan.md` and review:
 
 ### Generate First Test
 
+Preconditions: 
+- Select previously generated "test-plan.md" as context in Copilot
+- Select Generator Agent Mode
+
 ```
-@generator Generate test for: Create New Policy using getByTestId selectors
+@generator Generate test for: Create New Policy
+
+Optional prompt add-on: 
+Use fixtures, selector IDs as constants and use getByTestId
 ```
 
 **What Generator does:**
@@ -101,7 +111,7 @@ Open the generated `.spec.ts` file. Look for:
 ### Run the Test
 
 ```bash
-npx playwright test create-policy.spec.ts --headed
+npx playwright test create-policy.spec.ts --headed // name of the test can differ
 ```
 
 ### Generate More Tests
@@ -114,10 +124,11 @@ npx playwright test create-policy.spec.ts --headed
 
 ### Pro Tips
 
-**Specify selectors:**
+**Specify selectors and architecture:**
 ```
-@generator using data-testid selectors
-@generator prefer getByRole for accessibility
+@generator <prompt> using getByTestId with centralized selector constants
+@generator <prompt> use fixtures for common workflows
+@generator <prompt> abstract all data-testid values into a separate file
 ```
 
 **Batch generate:**
@@ -222,9 +233,16 @@ test('create policy', async ({ page }) => {
 
 **With Fixture:**
 ```ts
-test('create policy', async ({ page, policy }) => {
-  await policy.create({ number: 'POL-001', customer: 'Alice' });
-  await expect(page.getByTestId('policy-number-1')).toHaveText('POL-001');
+import { test, expect } from './fixtures';
+import { SELECTORS } from './constants/selectors';
+
+test('create policy', async ({ page, policiesPage }) => {
+  await policiesPage.goto();
+  await policiesPage.addPolicy({ 
+    policyNumber: 'POL-001', 
+    customerName: 'Alice'
+  });
+  await expect(page.getByTestId(SELECTORS.POLICY_NUMBER)).toHaveText('POL-001');
 });
 ```
 
@@ -266,6 +284,7 @@ Plan (Planner) → Generate (Generator) → Run → Heal (Healer) → Refine →
 - Test localStorage persistence across reloads
 - Add multi-policy scenarios
 - Test breadcrumb navigation
+- Externalize test data to JSON files for data-driven tests
 
 **Integrate with CI:**
 - Add GitHub Actions workflow

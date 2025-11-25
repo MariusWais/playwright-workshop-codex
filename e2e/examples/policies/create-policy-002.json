@@ -1,0 +1,10 @@
+{
+  "policyNumber": "POL-002",
+  "customerName": "Jane Doe",
+  "startDate": "2024-02-01",
+  "endDate": "2024-11-30",
+  "premiumAmount": "2500",
+  "expectedDisplay": {
+    "premiumAmount": "2500.00"
+  }
+}

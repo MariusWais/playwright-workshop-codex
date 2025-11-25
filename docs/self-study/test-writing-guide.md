@@ -24,10 +24,28 @@ Use selectors in this order of preference:
 **Why**: Immune to styling changes, clear intent, stable
 
 ```typescript
-// Good - Explicit test identifier
+// Best - Centralized selector constants
+import { SELECTORS } from './constants/selectors';
+await page.getByTestId(SELECTORS.SUBMIT_BUTTON).click();
+await page.getByTestId(SELECTORS.EMAIL_INPUT).fill('user@example.com');
+await page.getByTestId(SELECTORS.ERROR_MESSAGE).isVisible();
+
+// Good - Direct test identifier
 await page.getByTestId('submit-button').click();
 await page.getByTestId('email-input').fill('user@example.com');
 await page.getByTestId('error-message').isVisible();
+```
+
+**Centralize selectors** (recommended):
+```typescript
+// constants/selectors.ts
+export const SELECTORS = {
+  SUBMIT_BUTTON: 'submit-button',
+  EMAIL_INPUT: 'email-input',
+  ERROR_MESSAGE: 'error-message',
+  editButton: (id: number) => `edit-${id}`,
+  deleteButton: (id: number) => `delete-${id}`,
+};
 ```
 
 **Add to your HTML**:
@@ -40,7 +58,8 @@ await page.getByTestId('error-message').isVisible();
 **Benefits**:
 - Tests don't break when CSS classes change
 - Clear intention for testing
-- Easy to find in code reviews
+- Single source of truth for all selectors
+- Easy to find and update selectors
 - AI agents prefer these selectors
 
 ### 2. Role-Based Selectors
@@ -146,24 +165,39 @@ test.describe('Policy CRUD Operations', () => {
 
 ```typescript
 // fixtures.ts
+import { test as base } from '@playwright/test';
+import { SELECTORS } from './constants/selectors';
+
 export const test = base.extend({
   policiesPage: async ({ page }, use) => {
     const policiesPage = {
       async goto() {
         await page.goto('/policies');
       },
-      async createPolicy(data) {
-        // Implementation
+      async addPolicy(data) {
+        await page.getByTestId(SELECTORS.ADD_POLICY_BUTTON).click();
+        await page.getByTestId(SELECTORS.POLICY_NUMBER).fill(data.policyNumber);
+        await page.getByTestId(SELECTORS.CUSTOMER_NAME).fill(data.customerName);
+        await page.getByTestId(SELECTORS.SAVE_BUTTON).click();
       }
     };
     await use(policiesPage);
   }
 });
 
+export { expect } from '@playwright/test';
+
 // Usage in test
-test('create policy', async ({ policiesPage }) => {
+import { test, expect } from './fixtures';
+import { SELECTORS } from './constants/selectors';
+
+test('create policy', async ({ page, policiesPage }) => {
   await policiesPage.goto();
-  await policiesPage.createPolicy(data);
+  await policiesPage.addPolicy({
+    policyNumber: 'POL-001',
+    customerName: 'John Smith'
+  });
+  await expect(page.getByTestId(SELECTORS.POLICY_NUMBER)).toBeVisible();
 });
 ```
 

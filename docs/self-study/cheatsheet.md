@@ -34,16 +34,20 @@ npx playwright show-report          # View results
 ## Selectors (Priority Order)
 
 ```typescript
-// 1. Best
+// 1. Best - With constants
+import { SELECTORS } from './constants/selectors';
+await page.getByTestId(SELECTORS.SAVE_BUTTON).click();
+
+// 2. Good - Direct testid
 await page.getByTestId('button').click();
 
-// 2. Good
+// 3. OK - Role-based
 await page.getByRole('button', { name: 'Submit' }).click();
 
-// 3. OK
+// 4. OK - Text
 await page.getByText('Submit').click();
 
-// 4. Avoid
+// 5. Avoid - CSS
 await page.locator('.btn-primary').click();
 ```
 
@@ -70,14 +74,15 @@ await page.waitForLoadState('networkidle');
 
 ```typescript
 import { test, expect } from '../fixtures';
+import { SELECTORS } from '../constants/selectors';
 
 test.describe('Feature Name', () => {
-  test('should do something', async ({ page }) => {
+  test('should do something', async ({ page, policiesPage }) => {
     // Arrange
-    await page.goto('/');
+    await policiesPage.goto();
     
     // Act
-    await page.getByTestId('button').click();
+    await page.getByTestId(SELECTORS.BUTTON).click();
     
     // Assert
     await expect(page.getByText('Success')).toBeVisible();

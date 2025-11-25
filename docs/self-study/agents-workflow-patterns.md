@@ -115,6 +115,7 @@ Combine both approaches for optimal results:
 
 # Option A: Fast track
 @generator Create test for export to PDF functionality
+Use fixtures and selector constants for maintainability
 npx playwright test export.spec.ts
 @healer Fix if needed
 
@@ -122,6 +123,7 @@ npx playwright test export.spec.ts
 @planner Create test plan for new PDF export feature
 @generator Generate test for: PDF export happy path
 @generator Generate test for: Export with no data
+Reuse existing fixtures and selector constants
 npx playwright test
 @healer Fix any issues
 ```
@@ -151,7 +153,9 @@ npx playwright test
 # Step 2: Generator creates tests from plan
 @generator Generate test for scenario: Generate monthly report
 @generator Generate test for scenario: Export report as CSV
+Reuse fixtures and selector constants for consistency
 @generator Generate test for scenario: Schedule recurring report
+Extend fixtures with scheduling methods if needed
 
 # Step 3: Run and review
 npx playwright test --headed
@@ -232,12 +236,18 @@ git add . && git commit -m "refactor: form handling code"
    
    # Good
    @generator Create test for: Create New Policy with all required fields
+   
+   # Best
+   @generator Create test for: Create New Policy with all required fields
+   Use policiesPage.addPolicy() fixture method
+   Abstract all data-testid selectors to SELECTORS constant in constants/selectors.ts
    ```
 
 2. **One scenario per generation**
    - Easier to review
    - Easier to fix if something breaks
    - Better test isolation
+   - Specify architecture goals like using fixtures or constants for testids
 
 3. **Run tests after each generation** (optional but helpful)
    ```bash
@@ -252,6 +262,8 @@ git add . && git commit -m "refactor: form handling code"
    - Check assertions are correct
    - Verify test data makes sense
    - Look for hard-coded values that should be dynamic
+   - Confirm all selectors are abstracted to constants
+   - Verify fixtures are being used appropriately
 
 2. **Fix common issues**
    - Wrong selectors → `@healer Fix the test`

@@ -3,7 +3,7 @@ import { defineConfig } from '@playwright/test';
 const baseURL = 'http://localhost:4222';
 
 export default defineConfig({
-  testDir: './e2e/tests',
+  testDir: './e2e/examples',
   reporter: [['html']],
   expect: { timeout: 1000 },
   use: {

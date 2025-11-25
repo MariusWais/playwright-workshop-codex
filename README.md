@@ -51,7 +51,7 @@ npx playwright test --headed
 | Test Design (Planner Agent) | Explore app, generate test scenarios |
 | Test Coding (Generator Agent) | Create executable test code |
 | Test Maintenance (Healer Agent) | Fix failures, stabilize tests |
-| Best Practices & Wrap-Up | Pitfalls, architectures |
+| Best Practices & Wrap-Up | Pitfalls, architectures, maintainability patterns |
 
 ### 👉 [Open Workshop Guide](WORKSHOP.md)
 

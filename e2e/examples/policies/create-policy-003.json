@@ -1,0 +1,10 @@
+{
+  "policyNumber": "POL-003",
+  "customerName": "Robert Johnson",
+  "startDate": "2024-03-15",
+  "endDate": "2025-03-14",
+  "premiumAmount": "3750.50",
+  "expectedDisplay": {
+    "premiumAmount": "3750.50"
+  }
+}

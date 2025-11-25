@@ -43,28 +43,32 @@ test('create policy', async ({ page }) => {
 ## Approach 1: Page Object Classes
 
 ```typescript
-// pages/policies-page.ts
-import { Page, Locator, expect } from '@playwright/test';
+// constants/selectors.ts - Centralized selector constants
+export const SELECTORS = {
+  ADD_POLICY_BUTTON: 'add-policy',
+  POLICY_NUMBER: 'policyNumber',
+  CUSTOMER_NAME: 'customerName',
+  SAVE_BUTTON: 'save',
+  editButton: (id: number) => `edit-${id}`,
+  deleteButton: (id: number) => `delete-${id}`,
+};
 
-// Selector constants
-const ADD_POLICY_BTN = 'add-policy';
-const POLICY_NUMBER_INPUT = 'policyNumber';
-const CUSTOMER_NAME_INPUT = 'customerName';
-const SAVE_BTN = 'save';
+// pages/policies-page.ts
+import { Page, expect } from '@playwright/test';
+import { SELECTORS } from '../constants/selectors';
 
 export class PoliciesPage {
   constructor(private page: Page) {}
   
   async goto() {
     await this.page.goto('/policies');
-    await this.page.waitForLoadState('networkidle');
   }
   
   async createPolicy(data: { number: string; customer: string }) {
-    await this.page.getByTestId(ADD_POLICY_BTN).click();
-    await this.page.getByTestId(POLICY_NUMBER_INPUT).fill(data.number);
-    await this.page.getByTestId(CUSTOMER_NAME_INPUT).fill(data.customer);
-    await this.page.getByTestId(SAVE_BTN).click();
+    await this.page.getByTestId(SELECTORS.ADD_POLICY_BUTTON).click();
+    await this.page.getByTestId(SELECTORS.POLICY_NUMBER).fill(data.number);
+    await this.page.getByTestId(SELECTORS.CUSTOMER_NAME).fill(data.customer);
+    await this.page.getByTestId(SELECTORS.SAVE_BUTTON).click();
   }
   
   async expectPolicyVisible(policyNumber: string) {
@@ -122,10 +126,13 @@ export { expect };
 
 // test.spec.ts
 import { test, expect } from '../fixtures';
+import { SELECTORS } from '../constants/selectors';
 
-test('create policy', async ({ policiesPage }) => {
+test('create policy', async ({ page, policiesPage }) => {
   await policiesPage.goto();
   await policiesPage.createPolicy({ number: 'POL-001', customer: 'John' });
+  // Can still access SELECTORS for assertions if needed
+  await expect(page.getByTestId(SELECTORS.POLICY_NUMBER)).toBeVisible();
 });
 ```
 
@@ -166,11 +173,13 @@ export const test = base.extend({
 
 ## Best Practices
 
-1. **Keep Page Objects Focused** - One object per page/feature
-2. **Use Descriptive Method Names** - `clickAddPolicyButton()` not `click1()`
-3. **Group Assertions** - Keep assertions in separate methods
-4. **Handle Waiting** - Wait logic goes in page object, tests stay clean
-5. **Return Page Objects** - Support method chaining for fluent interface
+1. **Centralize Selectors** - Keep all data-testid values in `constants/selectors.ts`
+2. **Keep Page Objects Focused** - One object per page/feature
+3. **Use Descriptive Method Names** - `clickAddPolicyButton()` not `click1()`
+4. **Group Assertions** - Keep assertions in separate methods
+5. **Handle Waiting** - Wait logic goes in page object, tests stay clean
+6. **Return Page Objects** - Support method chaining for fluent interface
+7. **Import Selectors** - Always import SELECTORS constant in fixtures and tests
 
 ---
 
